@@ -1,24 +1,15 @@
 <?php 
 $a = 10;
 $b = 5;
-$operacao = "*";
+$operacao = "subtrcao";
 
-if ($operacao == "*") {
-    $resultado = $a * $b;
-    echo "$a x $b = $resultado";
-} elseif ($operacao == "+") {
-    $resultado = $a + $b;
-    echo "$a + $b = $resultado";
-} elseif ($operacao == "-") {
-    $resultado = $a - $b;
-    echo "$a - $b = $resultado";
-} elseif ($operacao == "/") {
-    $resultado = $a / $b;
-    echo "$a / $b = $resultado";
-} elseif ($operacao == "%") {
-    $resultado = $a % $b;
-    echo "$a % $b = $resultado";
-} else {
-    echo "Operador não existente";
-}
+$resultado = match($operacao) {
+    "soma" => $a + $b,
+    "subtracao" => $a - $b,
+    "multiplicacao" => $a * $b,
+    "divisao" => $a / $b,
+    default => throw new InvalidArgumentException("Operação inválida")
+};
+
+echo "O resultado da $operacao é: $resultado";  
 ?>
