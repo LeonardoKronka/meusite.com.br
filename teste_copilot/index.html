@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Aurora — Experiência Visual</title>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="theme-light">
+	<header class="nav">
+		<div class="nav-inner container">
+			<a class="brand" href="#">Aurora</a>
+			<nav class="menu" id="menu">
+				<a href="#features">Recursos</a>
+				<a href="#cards">Destaques</a>
+				<a href="#testimonials">Depoimentos</a>
+				<a href="#contact">Contato</a>
+			</nav>
+			<div class="actions">
+				<button id="themeToggle" class="btn-ghost" aria-label="Alternar tema">🌗</button>
+				<button id="menuToggle" class="btn-primary mobile-only" aria-label="Abrir menu">☰</button>
+			</div>
+		</div>
+		<!-- animated hero blobs -->
+		<div class="hero-blobs" aria-hidden="true">
+			<div class="blob b1"></div>
+			<div class="blob b2"></div>
+			<div class="blob b3"></div>
+		</div>
+	</header>
+
+	<main class="container">
+		<section class="hero">
+			<h1 class="reveal">Construa experiências digitais que encantam</h1>
+			<p class="lead reveal delay-1">Design, interações e performance — combinados em uma única experiência fluida e vibrante.</p>
+			<div class="cta reveal delay-2">
+				<a class="btn-primary" href="#cards">Ver Demonstração</a>
+				<a class="btn-ghost" href="#contact">Fale Conosco</a>
+			</div>
+		</section>
+
+		<section id="features" class="features">
+			<h2 class="section-title reveal">Recursos</h2>
+			<div class="grid reveal delay-1">
+				<article class="feature">
+					<div class="icon">⚡</div>
+					<h3>Performance</h3>
+					<p>Velocidade e responsividade otimizadas para todos os dispositivos.</p>
+				</article>
+				<article class="feature">
+					<div class="icon">🎨</div>
+					<h3>Design</h3>
+					<p>Layouts modernos com tipografia e paleta harmônicas.</p>
+				</article>
+				<article class="feature">
+					<div class="icon">🔒</div>
+					<h3>Confiabilidade</h3>
+					<p>Práticas seguras e código limpo para manutenibilidade.</p>
+				</article>
+				<article class="feature">
+					<div class="icon">🤝</div>
+					<h3>Suporte</h3>
+					<p>Integração fácil e suporte contínuo para seu projeto.</p>
+				</article>
+			</div>
+		</section>
+
+		<section id="cards" class="cards">
+			<h2 class="section-title reveal">Destaques</h2>
+			<div class="cards-grid reveal delay-1">
+				<article class="card">
+					<div class="card-media" aria-hidden="true"></div>
+					<h3>Interface Interativa</h3>
+					<p>Animações sutis que guiam o usuário sem distrair.</p>
+					<a class="card-cta" href="#">Explorar</a>
+				</article>
+				<article class="card">
+					<div class="card-media" aria-hidden="true"></div>
+					<h3>Sistema Modular</h3>
+					<p>Componentes reutilizáveis e fáceis de customizar.</p>
+					<a class="card-cta" href="#">Explorar</a>
+				</article>
+				<article class="card">
+					<div class="card-media" aria-hidden="true"></div>
+					<h3>Integrações</h3>
+					<p>APIs e ferramentas prontas para conectar seu produto.</p>
+					<a class="card-cta" href="#">Explorar</a>
+				</article>
+			</div>
+		</section>
+
+		<section id="testimonials" class="testimonials">
+			<h2 class="section-title reveal">O que falam</h2>
+			<div class="testimonial-slider reveal delay-1">
+				<blockquote class="testimonial active">"Uma evolução no design do nosso produto — todos os números subiram!" <cite>— Ana P.</cite></blockquote>
+				<blockquote class="testimonial">"Equipe super profissional e entrega impecável." <cite>— Carlos M.</cite></blockquote>
+				<blockquote class="testimonial">"Interfaces que conquistam clientes desde o primeiro clique." <cite>— Júlia R.</cite></blockquote>
+			</div>
+		</section>
+
+		<section id="contact" class="contact">
+			<h2 class="section-title reveal">Fale com a gente</h2>
+			<form class="contact-form reveal delay-1" onsubmit="event.preventDefault(); alert('Mensagem enviada — demonstração');">
+				<div class="fields">
+					<input type="text" placeholder="Seu nome" required />
+					<input type="email" placeholder="Seu email" required />
+				</div>
+				<textarea placeholder="Como podemos ajudar?" required></textarea>
+				<div class="form-actions">
+					<button class="btn-primary" type="submit">Enviar Mensagem</button>
+					<button class="btn-ghost" type="reset">Limpar</button>
+				</div>
+			</form>
+		</section>
+	</main>
+
+	<footer class="site-footer">
+		<div class="container">
+			<p>© <strong>Aurora</strong> — Design & Experiência. Feito com ✨</p>
+		</div>
+	</footer>
+
+	<script src="js/main.js" defer></script>
+</body>
+</html>
