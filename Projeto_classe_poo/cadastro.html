@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Cadastro de Usuário</h2>
+        <form action="salvar.php" method="post">
+
+            <!-- Campo: Tipo de usuário -->
+            <div class="campo">
+                <label for="tipo">Tipo</label>
+                <select name="tipo" id="tipo" required>
+                    <option value="">Selecione</option>
+                    <option value="professor">Professor</option>
+                    <option value="aluno">Aluno</option>
+                </select>
+            </div>
+
+            <!-- Campo: Nome -->
+            <div class="campo">
+                <label for="nome">Nome</label>
+                <input id="nome" type="text" name="nome" required>
+            </div>
+
+            <!-- Campo: Email -->
+            <div class="campo">
+                <label for="email">Email</label>
+                <input id="email" type="email" name="email" required>
+            </div>
+
+            <!-- Linha com dois campos: disciplina e matrícula -->
+            <div class="linha">
+                <div class="campo">
+                    <label for="disciplina">Disciplina 
+                        <span class="texto-secundario">(apenas para professor)</span>
+                    </label>
+                    <input id="disciplina" type="text" name="disciplina" placeholder="Ex: Matemática">
+                </div>
+
+                <div class="campo">
+                    <label for="matricula">Matrícula 
+                        <span class="texto-secundario">(apenas para aluno)</span>
+                    </label>
+                    <input id="matricula" type="text" name="matricula" placeholder="Número de matrícula">
+                </div>
+            </div>
+
+            <!-- Botão de envio -->
+            <div>
+                <button type="submit">Salvar</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

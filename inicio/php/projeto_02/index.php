@@ -7,7 +7,7 @@
 </head>
 <body>
     <div class="login-container">
-    <form action="gravar_chamada.php" method="post" style="text-align: center; font-family: Arial, sans-serif; background-color: blue; padding: 20px; border-radius: 10px; box-shadow: 0 0 5px rgba(0, 0, 0, 0.7); max-width: 400px; margin: auto;">
+    <form action="gravar_chamada.php" method="post" style="text-align: center; font-family: Arial, sans-serif; background-color: blue; padding: 20px; border-radius: 10px; box-shadow: 0 0 5px rgba(0, 0, 0, 2); max-width: 400px; margin: auto;">
         <h2 style="text-align: center;">Registro chamada</h2>
         <label for="nome" style="color: white; font-weight: bold; display:block; margin-top: 10px;">Nome</label>
         <input type="text" id="nome" name="nome" required
