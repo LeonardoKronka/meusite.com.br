@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Cardápio — Texas Espetos</title>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	<style>
+		:root{--primary:#ff5100;--dark:#6d3b00;--bg:#fffaf5;--card:#fff;--border:#e0b899}
+		body{margin:0;font-family:Inter,Arial,sans-serif;background:linear-gradient(135deg,var(--bg)60%,#ffe5d0);color:var(--dark)}
+		.header{position:sticky;top:0;padding:12px 20px;background:rgba(255,250,245,0.9);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;z-index:50}
+		.container{max-width:1100px;margin:28px auto;padding:0 18px}
+		.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+		.card{background:var(--card);padding:14px;border-radius:12px;border:1px solid var(--border);display:flex;flex-direction:column;align-items:flex-start;gap:8px;transition:transform .2s,box-shadow .2s}
+		.card:hover{transform:translateY(-6px);box-shadow:0 12px 36px rgba(224,184,153,0.07)}
+		.card img{width:100%;height:140px;object-fit:cover;border-radius:8px}
+		.card h4{margin:0;color:var(--primary)}
+		.row{display:flex;align-items:center;justify-content:space-between;width:100%}
+		.qty{display:flex;gap:8px;align-items:center}
+		.qty button{padding:6px 10px;border-radius:8px;border:1px solid #ddd;background:#fff;cursor:pointer}
+		.add-btn{background:var(--primary);color:#fff;border:none;padding:8px 12px;border-radius:12px;cursor:pointer;font-weight:700}
+		/* cart floating */
+		.cart-fab{position:fixed;right:24px;bottom:24px;background:var(--primary);width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.6rem;z-index:200;box-shadow:0 12px 36px rgba(224,184,153,0.18)}
+		.cart-modal{position:fixed;right:24px;bottom:96px;width:360px;max-width:94vw;background:#fff;border-radius:14px;padding:14px;border:1px solid var(--border);box-shadow:0 12px 40px rgba(224,184,153,0.18);display:none;z-index:210}
+		.cart-modal.open{display:block}
+		.cart-items{max-height:220px;overflow:auto;margin:8px 0;padding:0;list-style:none}
+		.cart-items li{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dotted var(--border)}
+		.empty{opacity:.6;text-align:center;padding:18px}
+		@media(max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}}
+		@media(max-width:540px){.grid{grid-template-columns:1fr}}
+	</style>
+</head>
+<body>
+	<header class="header" role="banner">
+		<a href="index.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--dark)">
+			<img src="img/logo_texas_certa.png" alt="Logo Texas" width="48" height="48" loading="lazy" style="border-radius:10px;border:3px solid var(--primary)">
+			<strong>Texas — Cardápio</strong>
+		</a>
+		<nav aria-label="Navegação">
+			<a href="index.html">Home</a>
+		</nav>
+	</header>
+
+	<main class="container" id="main">
+		<h2 style="color:var(--primary);font-family:'Bebas Neue',sans-serif">Nossos destaques</h2>
+		<p style="margin-top:6px;opacity:.8">Escolha itens, ajuste quantidade e finalize seu pedido.</p>
+
+		<section class="grid" aria-live="polite">
+			<!-- cards de produtos (mantive todos os itens convertidos para cards) -->
+			<div class="card" data-name="Frango" data-price="8.00">
+				<img src="img/frango.jpg" alt="Espeto de frango" loading="lazy">
+				<h4>Frango <small style="color:#777">— R$8,00</small></h4>
+				<p style="margin:0;color:#6d3b00">Sabor caseiro e tempero especial.</p>
+				<div class="row">
+					<div class="qty" aria-hidden="false">
+						<label class="visually-hidden">Quantidade</label>
+						<button class="qty-dec" aria-label="Diminuir quantidade">−</button>
+						<input class="qty-input" type="number" min="1" value="1" style="width:46px;padding:6px;border-radius:8px;border:1px solid #eee;text-align:center">
+						<button class="qty-inc" aria-label="Aumentar quantidade">+</button>
+					</div>
+					<button class="add-btn">Adicionar</button>
+				</div>
+			</div>
+
+			<div class="card" data-name="Boi" data-price="10.00">
+				<img src="img/boi.jpg" alt="Espeto de boi" loading="lazy">
+				<h4>Boi <small style="color:#777">— R$10,00</small></h4>
+				<p style="margin:0;color:#6d3b00">Carne suculenta e bem temperada.</p>
+				<div class="row">
+					<div class="qty" aria-hidden="false">
+						<label class="visually-hidden">Quantidade</label>
+						<button class="qty-dec" aria-label="Diminuir quantidade">−</button>
+						<input class="qty-input" type="number" min="1" value="1" style="width:46px;padding:6px;border-radius:8px;border:1px solid #eee;text-align:center">
+						<button class="qty-inc" aria-label="Aumentar quantidade">+</button>
+					</div>
+					<button class="add-btn">Adicionar</button>
+				</div>
+			</div>
+
+			<div class="card" data-name="Porco" data-price="8.00">
+				<img src="img/porco.jpg" alt="Espeto de porco" loading="lazy">
+				<h4>Porco <small style="color:#777">— R$8,00</small></h4>
+				<p style="margin:0;color:#6d3b00">Saboroso e com tempero especial.</p>
+				<div class="row">
+					<div class="qty" aria-hidden="false">
+						<label class="visually-hidden">Quantidade</label>
+						<button class="qty-dec" aria-label="Diminuir quantidade">−</button>
+						<input class="qty-input" type="number" min="1" value="1" style="width:46px;padding:6px;border-radius:8px;border:1px solid #eee;text-align:center">
+						<button class="qty-inc" aria-label="Aumentar quantidade">+</button>
+					</div>
+					<button class="add-btn">Adicionar</button>
+				</div>
+			</div>
+
+			<div class="card" data-name="Coração Galinha" data-price="9.00">
+				<img src="img/coracao_galinha.jpg" alt="Espeto de coração de galinha" loading="lazy">
+				<h4>Coração Galinha <small style="color:#777">— R$9,00</small></h4>
+				<p style="margin:0;color:#6d3b00">Delicioso e muito procurado.</p>
+				<div class="row">
+					<div class="qty" aria-hidden="false">
+						<label class="visually-hidden">Quantidade</label>
+						<button class="qty-dec" aria-label="Diminuir quantidade">−</button>
+						<input class="qty-input" type="number" min="1" value="1" style="width:46px;padding:6px;border-radius:8px;border:1px solid #eee;text-align:center">
+						<button class="qty-inc" aria-label="Aumentar quantidade">+</button>
+					</div>
+					<button class="add-btn">Adicionar</button>
+				</div>
+			</div>
+
+			<div class="card" data-name="Queijo coalho" data-price="8.00">
+				<img src="img/queijo_coalho.jpg" alt="Espeto de queijo coalho" loading="lazy">
+				<h4>Queijo coalho <small style="color:#777">— R$8,00</small></h4>
+				<p style="margin:0;color:#6d3b00">Queijo coalho grelhado, uma iguaria.</p>
+				<div class="row">
+					<div class="qty" aria-hidden="false">
+						<label class="visually-hidden">Quantidade</label>
+						<button class="qty-dec" aria-label="Diminuir quantidade">−</button>
+						<input class="qty-input" type="number" min="1" value="1" style="width:46px;padding:6px;border-radius:8px;border:1px solid #eee;text-align:center">
+						<button class="qty-inc" aria-label="Aumentar quantidade">+</button>
+					</div>
+					<button class="add-btn">Adicionar</button>
+				</div>
+			</div>
+
+			<div class="card" data-name="Pão de alho" data-price="8.00">
+				<img src="img/pao_de_alho.jpg" alt="Espeto de pão de alho" loading="lazy">
+				<h4>Pão de alho <small style="color:#777">— R$8,00</small></h4>
+				<p style="margin:0;color:#6d3b00">Pão de alho com queijo, uma combinação perfeita.</p>
+				<div class="row">
+					<div class="qty" aria-hidden="false">
+						<label class="visually-hidden">Quantidade</label>
+						<button class="qty-dec" aria-label="Diminuir quantidade">−</button>
+						<input class="qty-input" type="number" min="1" value="1" style="width:46px;padding:6px;border-radius:8px;border:1px solid #eee;text-align:center">
+						<button class="qty-inc" aria-label="Aumentar quantidade">+</button>
+					</div>
+					<button class="add-btn">Adicionar</button>
+				</div>
+			</div>
+
+			<div class="card" data-name="Frango com Bacon" data-price="10.00">
+				<img src="img/frango_bacon.jpg" alt="Medalhão de frango com bacon" loading="lazy">
+				<h4>Frango com Bacon <small style="color:#777">— R$10,00</small></h4>
+				<p style="margin:0;color:#6d3b00">Medalhão suculento envolto em bacon.</p>
+				<div class="row">
+					<div class="qty" aria-hidden="false">
+						<label class="visually-hidden">Quantidade</label>
+						<button class="qty-dec" aria-label="Diminuir quantidade">−</button>
+						<input class="qty-input" type="number" min="1" value="1" style="width:46px;padding:6px;border-radius:8px;border:1px solid #eee;text-align:center">
+						<button class="qty-inc" aria-label="Aumentar quantidade">+</button>
+					</div>
+					<button class="add-btn">Adicionar</button>
+				</div>
+			</div>
+
+			<div class="card" data-name="Queijo" data-price="12.00">
+				<img src="img/queijo.jpg" alt="Medalhão de queijo" loading="lazy">
+				<h4>Queijo <small style="color:#777">— R$12,00</small></h4>
+				<p style="margin:0;color:#6d3b00">Queijo derretido no ponto certo.</p>
+				<div class="row">
+					<div class="qty" aria-hidden="false">
+						<label class="visually-hidden">Quantidade</label>
+						<button class="qty-dec" aria-label="Diminuir quantidade">−</button>
+						<input class="qty-input" type="number" min="1" value="1" style="width:46px;padding:6px;border-radius:8px;border:1px solid #eee;text-align:center">
+						<button class="qty-inc" aria-label="Aumentar quantidade">+</button>
+					</div>
+					<button class="add-btn">Adicionar</button>
+				</div>
+			</div>
+
+			<div class="card" data-name="Mandioca" data-price="12.00">
+				<img src="img/mandioca.jpg" alt="Medalhão de mandioca" loading="lazy">
+				<h4>Mandioca <small style="color:#777">— R$12,00</small></h4>
+				<p style="margin:0;color:#6d3b00">Mandioca cozida e temperada.</p>
+				<div class="row">
+					<div class="qty" aria-hidden="false">
+						<label class="visually-hidden">Quantidade</label>
+						<button class="qty-dec" aria-label="Diminuir quantidade">−</button>
+						<input class="qty-input" type="number" min="1" value="1" style="width:46px;padding:6px;border-radius:8px;border:1px solid #eee;text-align:center">
+						<button class="qty-inc" aria-label="Aumentar quantidade">+</button>
+					</div>
+					<button class="add-btn">Adicionar</button>
+				</div>
+			</div>
+
+			<div class="card" data-name="Quiabo" data-price="10.00">
+				<img src="img/quiabo.jpg" alt="Medalhão de quiabo" loading="lazy">
+				<h4>Quiabo <small style="color:#777">— R$10,00</small></h4>
+				<p style="margin:0;color:#6d3b00">Quiabo grelhado, uma delícia.</p>
+				<div class="row">
+					<div class="qty" aria-hidden="false">
+						<label class="visually-hidden">Quantidade</label>
+						<button class="qty-dec" aria-label="Diminuir quantidade">−</button>
+						<input class="qty-input" type="number" min="1" value="1" style="width:46px;padding:6px;border-radius:8px;border:1px solid #eee;text-align:center">
+						<button class="qty-inc" aria-label="Aumentar quantidade">+</button>
+					</div>
+					<button class="add-btn">Adicionar</button>
+				</div>
+			</div>
+
+			<div class="card" data-name="Romeu e Julieta" data-price="12.00">
+				<img src="img/romeu_julieta.jpg" alt="Medalhão de Romeu e Julieta" loading="lazy">
+				<h4>Romeu e Julieta <small style="color:#777">— R$12,00</small></h4>
+				<p style="margin:0;color:#6d3b00">Uma explosão de sabores!</p>
+				<div class="row">
+					<div class="qty" aria-hidden="false">
+						<label class="visually-hidden">Quantidade</label>
+						<button class="qty-dec" aria-label="Diminuir quantidade">−</button>
+						<input class="qty-input" type="number" min="1" value="1" style="width:46px;padding:6px;border-radius:8px;border:1px solid #eee;text-align:center">
+						<button class="qty-inc" aria-label="Aumentar quantidade">+</button>
+					</div>
+					<button class="add-btn">Adicionar</button>
+				</div>
+			</div>
+
+			<div class="card" data-name="Kafta" data-price="9.00">
+				<img src="img/kafta.jpg" alt="Espeto de kafta" loading="lazy">
+				<h4>Kafta <small style="color:#777">— R$9,00</small></h4>
+				<p style="margin:0;color:#6d3b00">Carne moída temperada no espeto.</p>
+				<div class="row">
+					<div class="qty" aria-hidden="false">
+						<label class="visually-hidden">Quantidade</label>
+						<button class="qty-dec" aria-label="Diminuir quantidade">−</button>
+						<input class="qty-input" type="number" min="1" value="1" style="width:46px;padding:6px;border-radius:8px;border:1px solid #eee;text-align:center">
+						<button class="qty-inc" aria-label="Aumentar quantidade">+</button>
+					</div>
+					<button class="add-btn">Adicionar</button>
+				</div>
+			</div>
+
+			<div class="card" data-name="Kafta com queijo" data-price="9.00">
+				<img src="img/kafta_queijo.jpg" alt="Espeto de kafta com queijo" loading="lazy">
+				<h4>Kafta com queijo <small style="color:#777">— R$9,00</small></h4>
+				<p style="margin:0;color:#6d3b00">Kafta recheada com queijo derretido.</p>
+				<div class="row">
+					<div class="qty" aria-hidden="false">
+						<label class="visually-hidden">Quantidade</label>
+						<button class="qty-dec" aria-label="Diminuir quantidade">−</button>
+						<input class="qty-input" type="number" min="1" value="1" style="width:46px;padding:6px;border-radius:8px;border:1px solid #eee;text-align:center">
+						<button class="qty-inc" aria-label="Aumentar quantidade">+</button>
+					</div>
+					<button class="add-btn">Adicionar</button>
+				</div>
+			</div>
+
+			<div class="card" data-name="Kafta de Mandioca com Queijo" data-price="10.00">
+				<img src="img/kafta_mandioca_queijo.jpg" alt="Espeto de kafta de mandioca com queijo" loading="lazy">
+				<h4>Kafta de Mandioca com Queijo <small style="color:#777">— R$10,00</small></h4>
+				<p style="margin:0;color:#6d3b00">Uma combinação incrível de sabores.</p>
+				<div class="row">
+					<div class="qty" aria-hidden="false">
+						<label class="visually-hidden">Quantidade</label>
+						<button class="qty-dec" aria-label="Diminuir quantidade">−</button>
+						<input class="qty-input" type="number" min="1" value="1" style="width:46px;padding:6px;border-radius:8px;border:1px solid #eee;text-align:center">
+						<button class="qty-inc" aria-label="Aumentar quantidade">+</button>
+					</div>
+					<button class="add-btn">Adicionar</button>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<button class="cart-fab" id="cartFab" aria-label="Abrir carrinho">🛒<span id="count" style="position:absolute;top:6px;right:6px;background:#fff;color:var(--primary);width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem">0</span></button>
+
+	<div class="cart-modal" id="cartModal" role="dialog" aria-modal="true" aria-label="Carrinho de compras">
+		<h3 style="margin:0;color:var(--primary)">Seu carrinho</h3>
+		<ul class="cart-items" id="cartItems"></ul>
+		<div id="cartTotal" style="text-align:right;font-weight:700;margin-top:8px">Total: R$0,00</div>
+		<div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px">
+			<button id="closeCart">Fechar</button>
+			<button id="checkout" style="background:var(--primary);color:#fff;border-radius:10px;padding:8px 12px;border:none">Finalizar</button>
+		</div>
+	</div>
+
+	<script>
+		// Carrinho com persistência
+		const storageKey='texas_cart_v2';
+		let cart = JSON.parse(localStorage.getItem(storageKey)||'[]');
+
+		const formatBR = v=> v.toFixed(2).replace('.',',');
+
+		function saveCart(){ localStorage.setItem(storageKey, JSON.stringify(cart)); renderCart(); }
+
+		function renderCart(){
+			const list = document.getElementById('cartItems');
+			list.innerHTML='';
+			let total=0, count=0;
+			cart.forEach((it, idx)=>{
+				total += it.qty * it.price;
+				count += it.qty;
+				const li = document.createElement('li');
+				li.innerHTML = `<span>${it.name} x${it.qty}</span><span>R$${formatBR(it.qty*it.price)} <button data-idx="${idx}" style="background:none;border:none;color:#d33;cursor:pointer">✕</button></span>`;
+				list.appendChild(li);
+			});
+			if(cart.length===0) list.innerHTML='<li class="empty">Carrinho vazio</li>';
+			document.getElementById('cartTotal').textContent = 'Total: R$' + formatBR(total);
+			document.getElementById('count').textContent = count;
+			document.querySelectorAll('#cartItems button').forEach(btn=>btn.addEventListener('click',e=>{
+				const idx = +e.target.dataset.idx; cart.splice(idx,1); saveCart();
+			}));
+		}
+
+		// Add itens
+		document.querySelectorAll('.card').forEach(card=>{
+			const name = card.dataset.name;
+			const price = parseFloat(card.dataset.price);
+			const btn = card.querySelector('.add-btn');
+			const qtyInput = card.querySelector('.qty-input');
+			card.querySelector('.qty-inc').addEventListener('click', ()=> qtyInput.value = Math.max(1, +qtyInput.value + 1));
+			card.querySelector('.qty-dec').addEventListener('click', ()=> qtyInput.value = Math.max(1, +qtyInput.value - 1));
+			btn.addEventListener('click', ()=>{
+				const qty = Math.max(1, parseInt(qtyInput.value)||1);
+				const idx = cart.findIndex(i=>i.name===name);
+				if(idx>-1) cart[idx].qty += qty;
+				else cart.push({name,price,qty});
+				saveCart();
+				// feedback
+				btn.animate([{transform:'scale(1)'},{transform:'scale(.94)'},{transform:'scale(1)'}],{duration:220});
+			});
+		});
+
+		// FAB open/close
+		const cartFab = document.getElementById('cartFab'), cartModal = document.getElementById('cartModal');
+		cartFab.addEventListener('click', ()=> cartModal.classList.toggle('open'));
+
+		document.getElementById('closeCart').addEventListener('click', ()=> cartModal.classList.remove('open'));
+		document.getElementById('checkout').addEventListener('click', ()=>{
+			if(cart.length===0){ alert('Seu carrinho está vazio'); return; }
+			alert('Pedido simulado realizado com sucesso. Obrigado!');
+			cart=[]; saveCart(); cartModal.classList.remove('open');
+		});
+
+		// Init
+		renderCart();
+	</script>
+</body>
+</html>
+        @media (max-width: 800px) {
+            section, header {
+                max-width: 98vw;
+                padding-left: 6vw;
+                padding-right: 6vw;
+            }
+            header img {
+                left: 8px;
+                width: 80px;
+                top: 12px;
+            }
+        }
+        @media (max-width: 500px) {
+            header h1 {
+                font-size: 1.3rem;
+            }
+            nav a {
+                font-size: 0.95rem;
+                padding: 7px 10px;
+                margin: 0 4px;
+            }
+            section {
+                padding: 18px 2vw 12px 2vw;
+            }
+            .menu-list {
+                max-width: 98vw;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Cardápio do Texas</h1>
+        <img src="img/logo_texas_certa.png" alt="Logo Texas">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#espetos">Espetos</a></li>
+                <li><a href="#bebidas">Bebidas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- ESPETOS -->
+        <section id="espetos">
+            <h2>Espetos</h2>
+            <ul class="menu-list">
+                <li class="menu-category">
+                    <span>Comuns</span><br><br>
+                    <ul class="menu-items">
+                        <li><span>Frango</span><span>R$8,00</span><button class="add-btn" data-name="Frango" data-price="8.00">Adicionar</button></li>
+                        <li><span>Boi</span><span>R$10,00</span><button class="add-btn" data-name="Boi" data-price="10.00">Adicionar</button></li>
+                        <li><span>Porco</span><span>R$8,00</span><button class="add-btn" data-name="Porco" data-price="8.00">Adicionar</button></li>
+                        <li><span>Coração Galinha</span><span>R$9,00</span><button class="add-btn" data-name="Coração Galinha" data-price="9.00">Adicionar</button></li>
+                        <li><span>Queijo coalho</span><span>R$8,00</span><button class="add-btn" data-name="Queijo coalho" data-price="8.00">Adicionar</button></li>
+                        <li><span>Pão de alho</span><span>R$8,00</span><button class="add-btn" data-name="Pão de alho" data-price="8.00">Adicionar</button></li>
+                    </ul>
+                </li>
+                <li class="menu-category">
+                    <span>Medalhões</span><br><br>
+                    <ul class="menu-items">
+                        <li><span>Frango com Bacon</span><span>R$10,00</span><button class="add-btn" data-name="Frango com Bacon" data-price="10.00">Adicionar</button></li>
+                        <li><span>Queijo</span><span>R$12,00</span><button class="add-btn" data-name="Queijo" data-price="12.00">Adicionar</button></li>
+                        <li><span>Mandioca</span><span>R$12,00</span><button class="add-btn" data-name="Mandioca" data-price="12.00">Adicionar</button></li>
+                        <li><span>Quiabo</span><span>R$10,00</span><button class="add-btn" data-name="Quiabo" data-price="10.00">Adicionar</button></li>
+                        <li><span>Romeu e Julieta</span><span>R$12,00</span><button class="add-btn" data-name="Romeu e Julieta" data-price="12.00">Adicionar</button></li>
+                    </ul>
+                </li>
+                <li class="menu-category">
+                    <span>Especiais</span><br><br>
+                    <ul class="menu-items">
+                        <li><span>Kafta</span><span>R$9,00</span><button class="add-btn" data-name="Kafta" data-price="9.00">Adicionar</button></li>
+                        <li><span>Kafta com queijo</span><span>R$9,00</span><button class="add-btn" data-name="Kafta com queijo" data-price="9.00">Adicionar</button></li>
+                        <li><span>Kafta de Mandioca com Queijo</span><span>R$10,00</span><button class="add-btn" data-name="Kafta de Mandioca com Queijo" data-price="10.00">Adicionar</button></li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+        <!-- BEBIDAS -->
+        <section id="bebidas">
+            <h2>Bebidas</h2>
+            <ul class="menu-list">
+                <li class="menu-category">
+                    <span>Cerveja</span><br><br>
+                    <ul class="menu-items">
+                        <li><span>Skol</span><span>R$5,00</span><button class="add-btn" data-name="Skol" data-price="5.00">Adicionar</button></li>
+                        <li><span>Antarctica</span><span>R$5,00</span><button class="add-btn" data-name="Antarctica" data-price="5.00">Adicionar</button></li>
+                        <li><span>Brahma</span><span>R$5,00</span><button class="add-btn" data-name="Brahma" data-price="5.00">Adicionar</button></li>
+                        <li><span>Heineken</span><span>R$10,00</span><button class="add-btn" data-name="Heineken" data-price="10.00">Adicionar</button></li>
+                        <li><span>Budweiser</span><span>R$5,00</span><button class="add-btn" data-name="Budweiser" data-price="5.00">Adicionar</button></li>
+                    </ul>
+                </li>
+                <li class="menu-category">
+                    <span>Refrigerante</span><br><br>
+                    <ul class="menu-items">
+                        <li><span>Coca-Cola</span><span>R$6,00</span><button class="add-btn" data-name="Coca-Cola" data-price="6.00">Adicionar</button></li>
+                        <li><span>Guaraná Antarctica</span><span>R$6,00</span><button class="add-btn" data-name="Guaraná Antarctica" data-price="6.00">Adicionar</button></li>
+                        <li><span>Fanta Laranja</span><span>R$6,00</span><button class="add-btn" data-name="Fanta Laranja" data-price="6.00">Adicionar</button></li>
+                        <li><span>Sprite</span><span>R$6,00</span><button class="add-btn" data-name="Sprite" data-price="6.00">Adicionar</button></li>
+                    </ul>
+                </li>
+                <li class="menu-category">
+                    <span>Água</span><br><br>
+                    <ul class="menu-items">
+                        <li><span>Com gás</span><span>R$3,50</span><button class="add-btn" data-name="Água com gás" data-price="3.50">Adicionar</button></li>
+                        <li><span>Sem gás</span><span>R$3,00</span><button class="add-btn" data-name="Água sem gás" data-price="3.00">Adicionar</button></li>
+                    </ul>
+                </li>
+                <li class="menu-category">
+                    <span>Sucos</span><br><br>
+                    <ul class="menu-items">
+                        <li><span>Da Flora - Laranja</span><span>R$4,00</span><button class="add-btn" data-name="Suco Laranja" data-price="4.00">Adicionar</button></li>
+                        <li><span>Da Flora - Uva</span><span>R$4,00</span><button class="add-btn" data-name="Suco Uva" data-price="4.00">Adicionar</button></li>
+                        <li><span>Da Flora - Maracujá</span><span>R$4,00</span><button class="add-btn" data-name="Suco Maracujá" data-price="4.00">Adicionar</button></li>
+                        <li><span>Da Flora - Acerola</span><span>R$4,00</span><button class="add-btn" data-name="Suco Acerola" data-price="4.00">Adicionar</button></li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- Carrinho Flutuante -->
+    <button class="cart-fab" id="cartFab" aria-label="Abrir carrinho">
+        🛒
+        <span class="cart-count" id="cartCount">0</span>
+    </button>
+    <div class="cart-modal" id="cartModal">
+        <h3>Seu Carrinho</h3>
+        <ul class="cart-items-list" id="cartItems"></ul>
+        <div class="cart-total" id="cartTotal">Total: R$0,00</div>
+        <div class="cart-actions">
+            <button class="checkout-btn" id="checkoutBtn">Finalizar</button>
+            <button class="close-btn" id="closeCartBtn">Fechar</button>
+        </div>
+    </div>
+    <script>
+        // Carrinho de compras
+        const cart = [];
+        const cartFab = document.getElementById('cartFab');
+        const cartModal = document.getElementById('cartModal');
+        const cartCount = document.getElementById('cartCount');
+        const cartItems = document.getElementById('cartItems');
+        const cartTotal = document.getElementById('cartTotal');
+        const closeCartBtn = document.getElementById('closeCartBtn');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+
+        function updateCart() {
+            cartItems.innerHTML = '';
+            let total = 0;
+            cart.forEach((item, idx) => {
+                total += item.price * item.qty;
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <span>${item.name} <small>x${item.qty}</small></span>
+                    <span>
+                        R$${(item.price * item.qty).toFixed(2).replace('.', ',')}
+                        <button class="remove-btn" title="Remover" onclick="removeFromCart(${idx})">&times;</button>
+                    </span>
+                `;
+                cartItems.appendChild(li);
+            });
+            cartCount.textContent = cart.reduce((sum, i) => sum + i.qty, 0);
+            cartTotal.textContent = 'Total: R$' + total.toFixed(2).replace('.', ',');
+        }
+
+        function addToCart(name, price, btn) {
+            const idx = cart.findIndex(i => i.name === name);
+            if (idx >= 0) {
+                cart[idx].qty += 1;
+            } else {
+                cart.push({ name, price, qty: 1 });
+            }
+            updateCart();
+            // Animação de feedback no botão
+            btn.classList.add('added');
+            setTimeout(() => btn.classList.remove('added'), 700);
+        }
+
+        // Remover item do carrinho
+        window.removeFromCart = function(idx) {
+            cart.splice(idx, 1);
+            updateCart();
+        };
+
+        // Abrir/fechar carrinho
+        cartFab.onclick = () => {
+            cartModal.classList.toggle('open');
+        };
+        closeCartBtn.onclick = () => {
+            cartModal.classList.remove('open');
+        };
+
+        // Finalizar compra (simulação)
+        checkoutBtn.onclick = () => {
+            if (cart.length === 0) {
+                alert('Seu carrinho está vazio!');
+                return;
+            }
+            alert('Pedido realizado com sucesso! Obrigado por comprar no Texas Espetos.');
+            cart.length = 0;
+            updateCart();
+            cartModal.classList.remove('open');
+        };
+
+        // Adicionar eventos aos botões de adicionar
+        document.querySelectorAll('.add-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const name = this.getAttribute('data-name');
+                const price = parseFloat(this.getAttribute('data-price'));
+                addToCart(name, price, this);
+            });
+        });
+
+        // Fechar carrinho ao clicar fora
+        document.addEventListener('mousedown', function(e) {
+            if (cartModal.classList.contains('open') && !cartModal.contains(e.target) && !cartFab.contains(e.target)) {
+                cartModal.classList.remove('open');
+            }
+        });
+
+        // Animação de entrada para botões
+        document.querySelectorAll('.add-btn').forEach((btn, i) => {
+            btn.style.opacity = 0;
+            setTimeout(() => {
+                btn.style.transition = 'opacity 0.7s cubic-bezier(.4,2,.6,1)';
+                btn.style.opacity = 1;
+            }, 400 + i * 80);
+        });
+
+        // Inicializa carrinho vazio
+        updateCart();
+    </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+/* assets/style.css */
+:root{
+  --tx-red:#8b1e1e;     /* vermelho queimado */
+  --tx-sand:#f3e6d0;    /* areia/couro claro */
+  --tx-brown:#5a3b22;   /* marrom madeira */
+  --tx-ink:#1f1b16;     /* preto amarronzado */
+}
+
+*{ box-sizing: border-box; }
+body{
+  margin:0;
+  font-family: system-ui, Arial, sans-serif;
+  color: var(--tx-ink);
+  background: linear-gradient(180deg, var(--tx-sand), #fff);
+}
+
+.header{
+  background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat;
+  padding: 56px 20px;
+  text-align:center;
+  color: #fff;
+  position: relative;
+}
+.header::after{
+  content:"";
+  position:absolute; inset:0;
+  background: rgba(0,0,0,.45);
+}
+.header > *{ position: relative; z-index: 1; }
+.brand{
+  font-size: 42px; letter-spacing:2px; text-transform: uppercase;
+}
+.sub{
+  margin-top:8px; font-size: 14px; opacity:.85;
+}
+
+.nav{
+  background: var(--tx-brown);
+  display:flex; gap:12px; padding:10px 16px; flex-wrap: wrap;
+}
+.nav a{
+  color:#fff; text-decoration:none; padding:8px 12px; border-radius:10px;
+  background: rgba(255,255,255,.08);
+}
+.nav a:hover{ background: rgba(255,255,255,.18); }
+
+.container{ max-width: 980px; margin: 24px auto; padding: 0 16px; }
+
+.card{
+  background:#fff; border-radius:16px; padding:20px;
+  box-shadow: 0 6px 20px rgba(0,0,0,.12);
+}
+h1,h2{ color: var(--tx-brown); margin: 0 0 12px; }
+.btn{
+  display:inline-block; padding:10px 14px; border-radius:12px; border:0; cursor:pointer;
+  background: var(--tx-red); color:#fff; text-decoration:none;
+}
+.btn.secondary{ background: var(--tx-brown); }
+.btn:disabled{ opacity:.6; cursor:not-allowed; }
+
+.grid{ display:grid; gap:16px; }
+@media (min-width: 700px){ .grid-2{ grid-template-columns: 1fr 1fr; } }
+
+.input{
+  width:100%; padding:10px 12px; border-radius:10px; border:1px solid #ddd;
+  margin:6px 0 14px;
+}
+.table{
+  width:100%; border-collapse: collapse; overflow: hidden; border-radius:12px;
+}
+.table th, .table td{ padding:12px; border-bottom:1px solid #eee; }
+.table th{ background: #f8f1e7; text-align: left; }
+.badge{ background:#efe1cf; color:#5a3b22; padding:4px 8px; border-radius:999px; font-size:12px; }
+.notice{ background:#fff6e6; border-left:4px solid var(--tx-red); padding:10px 12px; border-radius:10px; }
+.footer{ text-align:center; color:#7a6b5a; padding:28px 16px; }

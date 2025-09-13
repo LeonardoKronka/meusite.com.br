@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>TEXAS — Espetos Artesanais</title>
+	<meta name="description" content="Texas Espetos — receitas caseiras, ingredientes selecionados. Espetos, bebidas e um ambiente familiar. Peça online.">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+	<style>
+		:root{
+			--bg:#fffaf5; --accent:#ffe5d0; --primary:#ff5100; --dark:#6d3b00; --card:#fff;
+			--muted:#a05a00; --border:#e0b899;
+		}
+		html,body{margin:0;height:100%;font-family:Inter,Segoe UI,Arial,sans-serif;background:linear-gradient(135deg,var(--bg) 60%,var(--accent)100%);color:var(--dark);-webkit-font-smoothing:antialiased}
+		/* header sticky */
+		.header {
+			position: sticky; top:0; z-index:60;
+			backdrop-filter: blur(6px);
+			background: rgba(255,250,245,0.85);
+			border-bottom: 1px solid var(--border);
+			display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 28px;
+			box-shadow: 0 6px 30px rgba(224,184,153,0.08);
+		}
+		.brand {display:flex;align-items:center;gap:14px;text-decoration:none}
+		.brand img{width:56px;height:56px;border-radius:12px;border:3px solid var(--primary);background:#fff;object-fit:cover}
+		.brand h1{font-family:'Bebas Neue',sans-serif;margin:0;font-size:1.6rem;color:var(--primary);letter-spacing:2px}
+		nav{display:flex;gap:10px;align-items:center}
+		nav a{color:var(--dark);text-decoration:none;padding:8px 14px;border-radius:12px;font-weight:600}
+		nav a:hover, nav a:focus{background:var(--primary);color:#fff;transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,81,0,0.12)}
+		/* hero */
+		.hero{max-width:1200px;margin:36px auto;padding:40px 28px;display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center}
+		.hero-card{background:var(--card);border-radius:16px;padding:28px;border:1px solid var(--border);box-shadow:0 12px 40px rgba(224,184,153,0.08)}
+		.hero h2{color:var(--primary);font-family:'Bebas Neue';font-size:2.4rem;margin:0 0 12px}
+		.hero p{margin:0 0 18px;line-height:1.6;color:var(--dark)}
+		.cta-row{display:flex;gap:12px;flex-wrap:wrap}
+		.btn{background:var(--primary);color:#fff;padding:12px 18px;border-radius:12px;border:none;cursor:pointer;font-weight:700;box-shadow:0 8px 30px rgba(255,81,0,0.12);transition:transform .18s,box-shadow .18s}
+		.btn.secondary{background:#fff;color:var(--primary);border:2px solid var(--primary)}
+		.btn:active{transform:scale(.98)}
+		/* features */
+		.features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px}
+		.feature{background:linear-gradient(180deg,#fff,#fffaf5);padding:16px;border-radius:12px;border:1px solid var(--border);text-align:left}
+		.feature h4{margin:0 0 8px;color:var(--primary);font-size:1.05rem}
+		/* testimonials */
+		.testimonials{max-width:1100px;margin:28px auto;padding:28px}
+		.testimonials-grid{display:flex;gap:14px;overflow:hidden}
+		.testimonial{flex:0 0 320px;background:var(--card);padding:18px;border-radius:12px;border:1px solid var(--border);box-shadow:0 6px 20px rgba(224,184,153,0.06);transform:translateY(0);transition:transform .35s}
+		.testimonial:hover{transform:translateY(-6px)}
+		/* faq */
+		.faq{max-width:900px;margin:28px auto;padding:0 18px}
+		.faq-item{background:#fff;border-radius:12px;padding:14px;border:1px solid var(--border);margin-bottom:10px}
+		.q{display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-weight:600}
+		.a{margin-top:8px;display:none;color:var(--muted)}
+		/* contact */
+		.contact{max-width:900px;margin:28px auto;padding:24px;border-radius:12px;background:var(--card);border:1px solid var(--border);box-shadow:0 12px 40px rgba(224,184,153,0.06)}
+		.form-row{display:flex;gap:12px}
+		.input,textarea{flex:1;padding:10px;border-radius:10px;border:1px solid #ddd;font-size:1rem}
+		textarea{min-height:110px}
+		.error{border-color:#d33}
+		.visually-hidden{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}
+		/* footer */
+		footer{max-width:1200px;margin:36px auto;padding:18px;text-align:center;color:var(--muted);font-size:0.95rem}
+		/* responsive */
+		@media (max-width:900px){ .hero{grid-template-columns:1fr} .features{grid-template-columns:1fr 1fr} }
+		@media (max-width:560px){ .features{grid-template-columns:1fr} nav{display:none} .brand h1{font-size:1.2rem} }
+	</style>
+</head>
+<body>
+	<header class="header" role="banner">
+		<a class="brand" href="index.html" aria-label="Texas - Início">
+			<img src="img/logo_texas_certa.png" alt="Logo Texas" loading="lazy">
+			<h1>TEXAS</h1>
+		</a>
+		<nav role="navigation" aria-label="Navegação principal">
+			<a href="#home" data-smooth>Home</a>
+			<a href="#sobre" data-smooth>Sobre</a>
+			<a href="cardapio.html">Cardápio</a>
+			<a href="#contato" data-smooth>Contato</a>
+		</nav>
+	</header>
+
+	<main>
+		<section id="home" class="hero" aria-labelledby="hero-title">
+			<div class="hero-card">
+				<h2 id="hero-title">Espetos artesanais. Sabor que reúne família e amigos.</h2>
+				<p>Receitas familiares, ingredientes selecionados e preparo artesanal. Peça online ou venha nos visitar.</p>
+				<div class="cta-row">
+					<a class="btn" href="cardapio.html">Ver cardápio</a>
+					<button class="btn secondary" data-smooth data-target="#contato">Faça uma reserva</button>
+				</div>
+
+				<div class="features" aria-hidden="false">
+					<div class="feature"><h4>Ingredientes frescos</h4><p>Fornecedores locais e seleção rigorosa.</p></div>
+					<div class="feature"><h4>Atendimento familiar</h4><p>Ambiente acolhedor e equipe treinada.</p></div>
+					<div class="feature"><h4>Sustentabilidade</h4><p>Embalagens recicláveis e práticas responsáveis.</p></div>
+				</div>
+			</div>
+
+			<aside style="display:flex;flex-direction:column;gap:12px;align-items:center">
+				<img src="img/espeto_hero.webp" alt="Espeto Texas" width="420" style="width:100%;border-radius:12px;object-fit:cover;box-shadow:0 12px 40px rgba(0,0,0,0.06)" loading="lazy">
+				<small style="color:var(--muted)">Entrega rápida e cuidado no preparo</small>
+			</aside>
+		</section>
+
+		<section id="sobre" style="max-width:900px;margin:18px auto;padding:0 18px">
+			<h3 style="color:var(--primary);font-family:'Bebas Neue';font-size:1.6rem;margin-bottom:8px">Sobre Nós</h3>
+			<p>O Texas traz tradição e qualidade. Nossa missão é oferecer momentos de união com alimentos preparados com carinho e ingredientes selecionados.</p>
+		</section>
+
+		<section class="testimonials" aria-labelledby="testimonials-title">
+			<h3 id="testimonials-title" style="text-align:center;color:var(--primary);font-family:'Bebas Neue'">O que dizem</h3>
+			<div class="testimonials-grid" role="list">
+				<div class="testimonial" role="listitem"><strong>Mariana</strong><p>"Melhores espetos da cidade — olha, recomendo!"</p></div>
+				<div class="testimonial" role="listitem"><strong>Carlos</strong><p>"Ótimo atendimento e ambiente familiar."</p></div>
+				<div class="testimonial" role="listitem"><strong>Fernanda</strong><p>"Peça rápida e tudo bem quentinho."</p></div>
+			</div>
+		</section>
+
+		<section class="faq" aria-labelledby="faq-title">
+			<h3 id="faq-title" style="color:var(--primary);font-family:'Bebas Neue'">Perguntas frequentes</h3>
+			<div class="faq-item">
+				<div class="q" tabindex="0">Fazem entrega? <span aria-hidden>▾</span></div>
+				<div class="a">Sim — cobrimos a região local. Pergunte no contato sobre horários.</div>
+			</div>
+			<div class="faq-item">
+				<div class="q" tabindex="0">Aceitam reservas? <span aria-hidden>▾</span></div>
+				<div class="a">Sim. Use o formulário abaixo ou ligue para nosso WhatsApp.</div>
+			</div>
+		</section>
+
+		<section id="contato" class="contact" aria-labelledby="contact-title">
+			<h3 id="contact-title" style="color:var(--primary);font-family:'Bebas Neue'">Contato & Reserva</h3>
+			<form id="contactForm" novalidate>
+				<label class="visually-hidden" for="name">Nome</label>
+				<div class="form-row">
+					<input id="name" class="input" name="name" placeholder="Seu nome" required>
+					<input id="phone" class="input" name="phone" placeholder="Telefone ou WhatsApp" required inputmode="tel">
+				</div>
+				<label class="visually-hidden" for="message">Mensagem</label>
+				<textarea id="message" name="message" placeholder="Mensagem / Pedido / Observações" required></textarea>
+				<div style="display:flex;gap:12px;justify-content:flex-end;margin-top:12px">
+					<button type="submit" class="btn">Enviar</button>
+					<button type="button" class="btn secondary" onclick="document.getElementById('contactForm').reset()">Limpar</button>
+				</div>
+			</form>
+		</section>
+	</main>
+
+	<footer aria-label="Rodapé">
+		Para mais informações ligue 
+        <img src="img/whatsapp.png" width="19px" height="19px" alt="WhatsApp">
+        <br>
+        <span>Todos os direitos reservados ao Texas Espetos</span>
+	</footer>
+
+	<script>
+		// Smooth scroll for links with data-smooth
+		document.querySelectorAll('[data-smooth]').forEach(el=>{
+			el.addEventListener('click', e=>{
+				e.preventDefault();
+				const target = el.getAttribute('href') || el.getAttribute('data-target');
+				const node = target && document.querySelector(target);
+				if(node) node.scrollIntoView({behavior:'smooth',block:'start'});
+				else if (target && target.startsWith('http')) location.href = target;
+			});
+		});
+
+		// FAQ toggle (keyboard accessible)
+		document.querySelectorAll('.faq-item .q').forEach(q=>{
+			q.addEventListener('click', ()=>{ q.nextElementSibling.style.display = q.nextElementSibling.style.display === 'block' ? 'none' : 'block'; });
+			q.addEventListener('keypress', (e)=>{ if(e.key === 'Enter' || e.key === ' ') q.click(); });
+		});
+
+		// Contact form validation + feedback 
+		document.getElementById('contactForm').addEventListener('submit', function(e){
+			e.preventDefault();
+			let valid = true;
+			['name','phone','message'].forEach(id=>{
+				const el = document.getElementById(id);
+				if(!el.value.trim()){ el.classList.add('error'); valid=false; } else el.classList.remove('error');
+			});
+			if(!valid){ alert('Preencha os campos obrigatórios.'); return; }
+			// Simular envio
+			document.querySelector('#contactForm .btn').textContent = 'Enviando...';
+			setTimeout(()=>{
+				alert('Mensagem enviada. Retornaremos em breve.');
+				this.reset();
+				document.querySelector('#contactForm .btn').textContent = 'Enviar';
+			},900);
+		});
+
+		// A11y: ensure header nav focusable
+		document.querySelectorAll('.header a, nav a').forEach(a=>a.setAttribute('tabindex', '0'));
+	</script>
+</body>
+</html>
+                padding: 22px 6vw 16px 6vw;
+            }
+        }
+    </style>
+    <!-- Google Fonts para um toque mais profissional -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <img src="img/logo_texas_certa.png" alt="Logo Texas">
+        <h1>TEXAS</h1>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="cardapio.html">Cardápio</a>
+        </nav>
+    </header>
+
+    <section id="home">
+        <h2>Sobre Nós</h2>
+        <p>
+            O Texas é um restaurante especializado em espetos e bebidas, 
+            oferecendo uma experiência única de sabor e qualidade.
+        </p>
+    </section>
+
+    <section id="visao">
+        <h2>Visão</h2>
+        <p>
+            Ser reconhecida como a marca de espetos mais querida e tradicional da região, mantendo 
+            a essência caseira e familiar, expandindo nosso
+            alcance para que mais pessoas possam experimentar o sabor único do Texas Espetos,
+            sempre com sustentabilidade e respeito às nossas raízes.
+        </p>
+    </section>
+
+    <section id="missao">
+        <h2>Missão</h2>
+        <p>
+            Oferecer momentos de alegria e união através de espetos saborosos e de alta qualidade, 
+            preparados com receitas familiares tradicionais e ingredientes selecionados, valorizando 
+            o sabor autêntico e o cuidado artesanal que conquistam nossos clientes há gerações.
+        </p>
+    </section>
+
+    <section id="valores">
+        <h2>Valores</h2>
+        <p>
+            Tradição e qualidade;<br><br>
+            Sabor autêntico e caseiro;<br><br>
+            Atendimento acolhedor e familiar;<br><br>
+            Ingredientes frescos e selecionados;<br><br>
+            Sustentabilidade e responsabilidade social;<br><br>
+            Paixão pelo que fazemos.
+        </p>
+    </section>
+    
+    <footer>
+        Para mais informações ligue 
+        <img src="img/whatsapp.png" width="19px" height="19px">
+        <br>
+        <span>Todos os direitos reservados ao Texas Espetos</span>
+    </footer>
+</body>
+</html>
